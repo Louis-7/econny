@@ -319,6 +319,7 @@ ion-content.e-background-pl{
   width: 100px;
   height: 100px;
   background-image: url('../img/picture_frame_page2.png');
+  background-repeat: no-repeat;
   background-size: contain;
   -moz-background-size: contain;
   -webkit-background-size: contain;
