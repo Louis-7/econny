@@ -8,16 +8,30 @@ angular.module('app.controllers', [])
     }).success(function (response, header, config, status) {
       $scope.plantList = response;
     }).error(function (response, status) {
-      consol.log(response, status);
+      console.log(response, status);
     });
 
     $scope.gotoLivingroom = function () {
       $state.go('livingRoom')
     }
+
+    $scope.gotoPlantList = function () {
+      $state.go('plantList')
+    }
   })
 
-  .controller('plantListCtrl', function ($scope) {
+  .controller('plantListCtrl', function ($scope,$http) {
+    $http({
+      method: 'GET',
+      url: 'mock/plantlist.json'
+    }).success(function (response, header, config, status) {
+      $scope.plantList = response;
+    }).error(function (response, status) {
+      console.log(response, status);
+    });
 
+    $scope.toggleLike = function(){
+    }
   })
 
   .controller('livingRoomCtrl', function ($scope, $http, $ionicScrollDelegate) {
