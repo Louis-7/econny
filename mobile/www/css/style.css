@@ -304,20 +304,20 @@ ion-content.e-background-pl{
   margin-top: 25px;
 }
 
-.e-plant {
+.e-plant-item {
   width: 100%;
   height: 130px;
   padding: 0 10px;
-  margin-bottom: 25px;
+  margin-bottom: 5px;
 }
 
-.e-plant div {
+.e-plant-item div {
   float: left;
 }
 
 .e-frame-pl {
-  width: 121px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   background-image: url('../img/picture_frame_page2.png');
   background-size: contain;
   -moz-background-size: contain;
@@ -326,17 +326,18 @@ ion-content.e-background-pl{
 }
 
 .e-frame-pl img {
-  width: 103px;
-  height: 103px;
-  border-radius: 103px;
+  width: 85px;
+  height: 85px;
+  border-radius: 85px;
   position: relative;
-  top: 7px;
-  left: 7px;
+  top: 6px;
+  left: 6px;
 }
 
 .e-info-pl {
   height: 100%;
-  width: 180px;
+  width:40%;
+  min-width: 145px;
   display: inline-block;
   padding-left: 30px;
 }
@@ -344,7 +345,7 @@ ion-content.e-background-pl{
 .e-info-pl .e-plantname-pl {
   font-weight: bold;
   color: #7bc860;
-  margin: 36px 0 0 0;
+  margin: 19px 0 0 0;
   font-size: 15px;
 }
 
@@ -368,7 +369,7 @@ div.e-like {
 .e-like img {
   width: 30px;
   height: 27px;
-  margin-top: 56px;
+  margin-top: 34px;
 }
 
 .e-bar-search{
