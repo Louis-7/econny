@@ -48,13 +48,14 @@ angular.module('app.controllers', [])
         }));
 
         $http({
-          method: 'POST',
-          url: 'http://120.25.102.53/RockPlant/app/talk.do',
-          data: {question: $scope.input.userinput}
+          method: 'GET',
+          url: 'http://120.25.102.53/RockPlant/app/talk2plant.do?question=' + $scope.input.userinput
+          //data: {question: $scope.input.userinput}
         }).success(function (response, header, config, status) {
           console.log("======================================================== API =======================================================")
           if (response.content) {
-            $scope.messages.push(angular.extend({}, {content: '<p>' + response.content + '</p>', source: 'e'}));
+            //response.content = response.content.substring(1,response.content.length - 2);
+            $scope.messages.push(angular.extend({}, {content: '<p>' + JSON.parse(response.content) + '</p>', source: 'e'}));
             $ionicScrollDelegate.scrollBottom(true);
           }
         }).error(function (response, status) {
