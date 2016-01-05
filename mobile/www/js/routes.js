@@ -7,36 +7,44 @@ angular.module('app.routes', [])
   // Set up the various states which the app can be in.
   // Each state's controller can be found in controllers.js
   $stateProvider
-    
-      
-        
+
+
+
     .state('eCOnnY', {
       url: '/econny',
       templateUrl: 'templates/eCOnnY.html',
       controller: 'eCOnnYCtrl'
     })
-        
-      
-    
-      
-        
+
+
+
+
+
     .state('plantList', {
       url: '/list',
       templateUrl: 'templates/plantList.html',
       controller: 'plantListCtrl'
     })
-        
-      
-    
-      
-        
+
+
+
+
+
     .state('livingRoom', {
       url: '/living',
       templateUrl: 'templates/livingRoom.html',
       controller: 'livingRoomCtrl'
     })
-        
-      
+
+
+
+    .state('guidePage', {
+      url: '/guide',
+      templateUrl: 'templates/guidePage.html',
+      controller: 'guidePageCtrl'
+    })
+
+
     ;
 
   // if none of the above states are matched, use this as the fallback

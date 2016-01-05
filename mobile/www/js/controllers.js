@@ -2,14 +2,17 @@ angular.module('app.controllers', [])
 
   .controller('eCOnnYCtrl', function ($scope, $http, $state) {
     $scope.plantList = [];
-    $http({
-      method: 'GET',
-      url: 'mock/myplants.json'
-    }).success(function (response, header, config, status) {
-      $scope.plantList = response;
-    }).error(function (response, status) {
-      console.log(response, status);
-    });
+
+    $scope.onInitialize = function () {
+      $http({
+        method: 'GET',
+        url: 'mock/myplants.json'
+      }).success(function (response, header, config, status) {
+        $scope.plantList = response;
+      }).error(function (response, status) {
+        console.log(response, status);
+      });
+    }
 
     $scope.gotoLivingroom = function () {
       $state.go('livingRoom')
@@ -20,7 +23,7 @@ angular.module('app.controllers', [])
     }
   })
 
-  .controller('plantListCtrl', function ($scope,$http) {
+  .controller('plantListCtrl', function ($scope, $http) {
     $http({
       method: 'GET',
       url: 'mock/plantlist.json'
@@ -30,7 +33,7 @@ angular.module('app.controllers', [])
       console.log(response, status);
     });
 
-    $scope.toggleLike = function(){
+    $scope.toggleLike = function () {
     }
   })
 
@@ -55,7 +58,10 @@ angular.module('app.controllers', [])
           console.log("======================================================== API =======================================================")
           if (response.content) {
             //response.content = response.content.substring(1,response.content.length - 2);
-            $scope.messages.push(angular.extend({}, {content: '<p>' + JSON.parse(response.content) + '</p>', source: 'e'}));
+            $scope.messages.push(angular.extend({}, {
+              content: '<p>' + JSON.parse(response.content) + '</p>',
+              source: 'e'
+            }));
             $ionicScrollDelegate.scrollBottom(true);
           }
         }).error(function (response, status) {
@@ -106,5 +112,17 @@ angular.module('app.controllers', [])
         //console.log(response,status);
         console.log("======================================================== ERROR =====================================================")
       });
+    }
+  })
+
+  .controller('indexCtrl', function ($scope) {
+    $scope.firstTime = false;
+    if (localStorage.getItem('firstTime') == null) {
+      localStorage.setItem('firstTime', false);
+      $scope.firstTime = true;
+    }
+
+    $scope.closeGuide = function () {
+      $scope.firstTime = false;
     }
   })

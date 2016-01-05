@@ -296,7 +296,7 @@ ion-content.e-content {
   margin-top: 0;
 }
 
-ion-content.e-background-pl{
+ion-content.e-background-pl {
   background-color: #fafcfa;
 }
 
@@ -337,7 +337,7 @@ ion-content.e-background-pl{
 
 .e-info-pl {
   height: 100%;
-  width:40%;
+  width: 40%;
   min-width: 145px;
   display: inline-block;
   padding-left: 30px;
@@ -373,17 +373,49 @@ div.e-like {
   margin-top: 34px;
 }
 
-.e-bar-search{
-  width:200px;
+.e-bar-search {
+  width: 200px;
   border-radius: 50px;
   background-color: #95d380;
   border: none;
-  height:25px;
+  height: 25px;
   color: #ffffff;
   padding-left: 12px;
 }
 
-.e-bar-search::-webkit-input-placeholder{
+.e-bar-search::-webkit-input-placeholder {
   color: #ffffff;
   padding-left: 2px;
+}
+
+div.e-slide ion-view{
+  background-color: #85c36e;
+  height: 100%;
+}
+
+.e-slide-box ion-slide img {
+  width: 258px;
+  margin: 0 auto;
+  display: block;
+}
+
+div.e-slide-button {
+  background: url("../img/startbutton.png") no-repeat;
+  -webkit-background-size: contain;
+  background-size: contain;
+  width: 137px;
+  height: 31px;
+  margin: auto;
+  position: relative;
+  top: -63px;;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-top: 7px;
+}
+
+div.e-slide-button h5 {
+  color: #85c36e;
+  display: block;
+  margin: 0 0 0 34px;
 }
