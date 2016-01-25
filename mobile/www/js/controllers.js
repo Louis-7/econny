@@ -46,7 +46,7 @@ angular.module('app.controllers', [])
 
       if ($scope.input.userinput) {
         $scope.messages.push(angular.extend({}, {
-          content: '<p>' + $scope.input.userinput + '</p>',
+          content: '<p>' + $scope.input.userinput + '</p> <div class="e-user-img"></div>',
           source: 'u'
         }));
 
@@ -59,7 +59,7 @@ angular.module('app.controllers', [])
           if (response.content) {
             //response.content = response.content.substring(1,response.content.length - 2);
             $scope.messages.push(angular.extend({}, {
-              content: '<p>' + JSON.parse(response.content) + '</p>',
+              content: '<div class="e-plant-img"></div><p>' + JSON.parse(response.content) + '</p>',
               source: 'e'
             }));
             $ionicScrollDelegate.scrollBottom(true);
@@ -89,7 +89,7 @@ angular.module('app.controllers', [])
         if (!$scope.messages) {
           angular.forEach(response, function (res) {
             if (res.content.indexOf('OK!') === -1) {
-              $scope.messageOptions.push(angular.extend({}, {content: '<p>' + res.content + '</p>', source: 'e'}))
+              $scope.messageOptions.push(angular.extend({}, {content: '<div class="e-plant-img"></div><p>' + res.content + '</p>', source: 'e'}))
             }
 
           })
@@ -101,7 +101,7 @@ angular.module('app.controllers', [])
         else {
           angular.forEach(response, function (res) {
             if (res.content.indexOf('OK!') === -1) {
-              $scope.messages.push(angular.extend({}, {content: '<p>' + res.content + '</p>', source: 'e'}));
+              $scope.messages.push(angular.extend({}, {content: '<div class="e-plant-img"></div><p>' + res.content + '</p>', source: 'e'}));
             }
           })
 

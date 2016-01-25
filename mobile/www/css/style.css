@@ -220,7 +220,7 @@ ion-content.e-content {
 .messages li {
   display: block;
   clear: both;
-  max-width: 50%;
+  max-width: 100%;
   margin: 0 0 1rem 0;
   padding: 0;
   color: #333333;
@@ -234,20 +234,19 @@ ion-content.e-content {
   float: right;
 }
 
-/*.messages li:nth-child(even) {*/
-/*float: right;*/
-/*}*/
-
-/*.messages li:nth-child(even) img {*/
-/*float: right;*/
-/*}*/
-
 .messages li p {
   border-radius: .75rem;
   padding: .6875rem;
   margin: 0;
   font-size: .875rem;
   border: 1px solid #7bc860;
+  display: inline-block;
+  max-width: 75%;
+  vertical-align: bottom;
+}
+
+.messages li div{
+  margin-top: 0;
 }
 
 .messages li.e-plant p {
@@ -256,6 +255,26 @@ ion-content.e-content {
 
 .messages li.e-user p {
   background: #ceebc4;
+}
+
+
+.messages div.e-plant-img {
+  width: 50px;
+  height: 50px;
+  background: url("../img/plant_new_1.png") no-repeat;
+  -webkit-background-size: contain;
+  vertical-align: top;
+  display: inline-block;
+}
+
+.messages div.e-user-img {
+  width: 50px;
+  height: 50px;
+  background: url("../img/plant_new_2.png") no-repeat;
+  -webkit-background-size: contain;
+  display: inline-block;
+  vertical-align: top;
+  transform: rotateY(180deg);
 }
 
 /*message style end*/
@@ -419,3 +438,5 @@ div.e-slide-button h5 {
   display: block;
   margin: 0 0 0 34px;
 }
+
+
