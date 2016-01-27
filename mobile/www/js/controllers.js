@@ -7,7 +7,9 @@ angular.module('app.controllers', [])
       $http({
         method: 'GET',
         url: 'mock/myplants.json'
+        //url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=1'
       }).success(function (response, header, config, status) {
+        //$scope.plantList = response.data;
         $scope.plantList = response;
       }).error(function (response, status) {
         console.log(response, status);
@@ -19,7 +21,7 @@ angular.module('app.controllers', [])
     }
 
     $scope.gotoPlantList = function () {
-      $state.go('plantList')
+      $state.go('plantList.new')
     }
   })
 

@@ -316,6 +316,7 @@ ion-content.e-content {
 }
 
 ion-content.e-background-pl {
+  top:59px;
   background-color: #fafcfa;
 }
 

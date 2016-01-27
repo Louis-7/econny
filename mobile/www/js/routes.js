@@ -22,10 +22,36 @@ angular.module('app.routes', [])
 
     .state('plantList', {
       url: '/list',
+      abstract:true,
       templateUrl: 'templates/plantList.html',
       controller: 'plantListCtrl'
     })
 
+
+
+
+    .state('plantList.new', {
+      url: '/new',
+      views: {
+        'listView': {
+          templateUrl: 'templates/bind.html',
+          controller: 'plantListCtrl'
+        }
+      }
+    })
+
+
+
+
+    .state('plantList.search', {
+      url: '/search',
+      views: {
+        'listView': {
+          templateUrl: 'templates/search.html',
+          controller: 'plantListCtrl'
+        }
+      }
+    })
 
 
 
@@ -35,6 +61,8 @@ angular.module('app.routes', [])
       templateUrl: 'templates/livingRoom.html',
       controller: 'livingRoomCtrl'
     })
+
+
 
 
 
