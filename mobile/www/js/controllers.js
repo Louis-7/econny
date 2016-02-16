@@ -2,6 +2,17 @@ angular.module('app.controllers', [])
 
   .controller('eCOnnYCtrl', function ($scope, $http, $state) {
     $scope.plantList = [];
+    $scope.users = [
+      {
+        key: 'Shanghai',
+        value: 1
+      },
+      {
+        key: 'Dalian',
+        value: 2
+      }];
+
+    $scope.currentUser = localStorage.getItem('currentUser');
 
     $scope.onInitialize = function () {
       $http({
@@ -22,6 +33,10 @@ angular.module('app.controllers', [])
 
     $scope.gotoPlantList = function () {
       $state.go('plantList.new')
+    }
+
+    $scope.setCurrentUser = function (currentUser) {
+      localStorage.setItem('currentUser', currentUser);
     }
   })
 
@@ -149,5 +164,10 @@ angular.module('app.controllers', [])
 
     $scope.closeGuide = function () {
       $scope.firstTime = false;
+    }
+
+    //set default user
+    if (localStorage.getItem('currentUser') == null) {
+      localStorage.setItem('currentUser', 'shanghai');
     }
   })

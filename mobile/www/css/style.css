@@ -142,6 +142,10 @@ ion-content.e-background {
   font-size: 10px;
 }
 
+label.e-select-user{
+  margin-top: 40px;
+}
+
 .bar.bar-subheader.e-statusbar {
   height: auto;
   width: 100%;
@@ -172,6 +176,10 @@ ion-content.e-background {
 
 ion-content.e-content {
   top: 131px;
+}
+
+ion-content.e-has-selector{
+  margin-top: 46px;
 }
 
 .bar-frosted.e-footbar {
