@@ -321,7 +321,7 @@ ion-content.e-background-pl {
 }
 
 .e-plant-list {
-  margin-top: 25px;
+  margin-top: 40px;
 }
 
 .e-plant-item {
@@ -438,6 +438,10 @@ div.e-slide-button h5 {
   color: #85c36e;
   display: block;
   margin: 0 0 0 34px;
+}
+
+div.e-plant-search{
+  margin-top: 45px;
 }
 
 

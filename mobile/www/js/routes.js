@@ -57,7 +57,7 @@ angular.module('app.routes', [])
 
 
     .state('livingRoom', {
-      url: '/living',
+      url: '/living/:id',
       templateUrl: 'templates/livingRoom.html',
       controller: 'livingRoomCtrl'
     })

@@ -16,8 +16,8 @@ angular.module('app.controllers', [])
       });
     }
 
-    $scope.gotoLivingroom = function () {
-      $state.go('livingRoom')
+    $scope.gotoLivingroom = function (plant_id) {
+      $state.go('livingRoom', {id: plant_id})
     }
 
     $scope.gotoPlantList = function () {
@@ -26,20 +26,34 @@ angular.module('app.controllers', [])
   })
 
   .controller('plantListCtrl', function ($scope, $http) {
+
+    $scope.bind = {
+      "boxid": "",
+      "circleid": ""
+    }
+
     $http({
       method: 'GET',
-      url: 'mock/plantlist.json'
+      url: 'mock/plantlist.json' //http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=1
     }).success(function (response, header, config, status) {
       $scope.plantList = response;
     }).error(function (response, status) {
       console.log(response, status);
     });
 
-    $scope.toggleLike = function () {
+    $scope.toggleLike = function (plant_id) {
+      $scope.plant.like = !$scope.plant.like;
+      //http://127.0.0.1:8080/RockPlant/app/appController.do?operation=follow&user_login_id=11&plant_id=10
     }
+
+    $scope.bindPlant = function () {
+      console.log($scope.bind.boxid + " " + $scope.bind.circleid);
+      //http://120.25.102.53/RockPlant/app/appController.do?operation=bind&user_login_id=11&plant_id=10
+    }
+
   })
 
-  .controller('livingRoomCtrl', function ($scope, $http, $ionicScrollDelegate) {
+  .controller('livingRoomCtrl', function ($scope, $http, $stateParams, $ionicScrollDelegate) {
     $scope.status = {};
     $scope.input = {userinput: null};
     $scope.messageOptions = [];
@@ -76,9 +90,12 @@ angular.module('app.controllers', [])
     }
 
     $scope.requestData = function () {
+
+      console.log($stateParams.id);
       $http({
         method: 'GET',
         url: 'http://120.25.102.53/RockPlant/app/queryStatus.do'
+        //http://120.25.102.53/RockPlant/app/queryStatus.do?plant_id=1
         //url: '../mock/data.json'
       }).success(function (response, header, config, status) {
         $scope.status = {
@@ -91,7 +108,10 @@ angular.module('app.controllers', [])
         if (!$scope.messages) {
           angular.forEach(response, function (res) {
             if (res.content.indexOf('OK!') === -1) {
-              $scope.messageOptions.push(angular.extend({}, {content: '<div class="e-plant-img"></div><p>' + res.content + '</p>', source: 'e'}))
+              $scope.messageOptions.push(angular.extend({}, {
+                content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
+                source: 'e'
+              }))
             }
 
           })
@@ -103,7 +123,10 @@ angular.module('app.controllers', [])
         else {
           angular.forEach(response, function (res) {
             if (res.content.indexOf('OK!') === -1) {
-              $scope.messages.push(angular.extend({}, {content: '<div class="e-plant-img"></div><p>' + res.content + '</p>', source: 'e'}));
+              $scope.messages.push(angular.extend({}, {
+                content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
+                source: 'e'
+              }));
             }
           })
 

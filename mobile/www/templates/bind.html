@@ -2,20 +2,13 @@
   <ion-content padding="true" class="has-header e-background-pl">
     <div class="list">
       <label class="item item-input">
-        <input type="text" placeholder="Life Online Box ID">
+        <input type="text" placeholder="Life Online Box ID" ng-model="bind.boxid">
       </label>
       <label class="item item-input">
-        <input type="text" placeholder="EID">
-      </label>
-      <label class="item item-input">
-        <input type="text" placeholder="Enterprise Password">
+        <input type="text" placeholder="Circle ID" ng-model="bind.circleid">
       </label>
 
-      <label class="item item-input">
-        <input type="text" placeholder="Circle ID">
-      </label>
-
-      <button class="button  button-block button-balanced">
+      <button class="button  button-block button-balanced" ng-click="bindPlant()">
         Start Bind
       </button>
     </div>
