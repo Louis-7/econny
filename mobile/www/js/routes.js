@@ -12,6 +12,7 @@ angular.module('app.routes', [])
 
     .state('eCOnnY', {
       url: '/econny',
+      cache:false,
       templateUrl: 'templates/eCOnnY.html',
       controller: 'eCOnnYCtrl'
     })
