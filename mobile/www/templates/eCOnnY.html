@@ -1,13 +1,9 @@
 <ion-view title="Surprise Life" ng-init="onInitialize()">
-  <div class="list">
-
-    <label class="item item-input item-select e-select-user">
+  <div class="list e-list-user">
+    <label class="item item-input item-select">
       <div class="input-label">
         Location
       </div>
-      <!--<select ng-model="currentUser" ng-change="setCurrentUser(currentUser)">-->
-        <!--<option ng-selected="user.value === currentUser" ng-repeat="user in users" value="{{user.value}}">{{user.key}}</option>-->
-      <!--</select>-->
       <select ng-model="currentUser" ng-options="user.key for user in users" ng-change="setCurrentUser(currentUser)">
       </select>
     </label>

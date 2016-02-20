@@ -142,9 +142,12 @@ ion-content.e-background {
   font-size: 10px;
 }
 
-label.e-select-user{
+div.e-list-user{
   margin-top: 40px;
 }
+/*label.e-select-user{*/
+  /*margin-top: 40px;*/
+/*}*/
 
 .bar.bar-subheader.e-statusbar {
   height: auto;
@@ -323,13 +326,18 @@ ion-content.e-has-selector{
   margin-top: 0;
 }
 
-ion-content.e-background-pl {
+ion-content.e-bind-background {
   top:59px;
   background-color: #fafcfa;
 }
 
+ion-content.e-search-background {
+  top:77px;
+  background-color: #fafcfa;
+}
+
 .e-plant-list {
-  margin-top: 40px;
+  margin-top: 30px;
 }
 
 .e-plant-item {
@@ -449,7 +457,7 @@ div.e-slide-button h5 {
 }
 
 div.e-plant-search{
-  margin-top: 45px;
+  margin-top: 54px;
 }
 
 
