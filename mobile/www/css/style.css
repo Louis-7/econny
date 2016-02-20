@@ -143,11 +143,13 @@ ion-content.e-background {
 }
 
 .platform-ios.platform-cordova div.e-list-user{
-  margin-top: 40px;
+  position: relative;
+  top: 40px;
 }
 
 div.e-list-user{
   position: relative;
+  top: 40px;
 }
 /*label.e-select-user{*/
   /*margin-top: 40px;*/
