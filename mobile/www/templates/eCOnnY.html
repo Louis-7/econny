@@ -7,7 +7,6 @@
       <select ng-model="currentUser" ng-options="user.key for user in users" ng-change="setCurrentUser(currentUser)">
       </select>
     </label>
-
   </div>
   <ion-content padding="true" class="has-header e-background e-has-selector">
     <div class="e-frame" ng-repeat="plant in plantList" ng-click="gotoLivingroom(plant.plant_id)">

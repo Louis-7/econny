@@ -147,7 +147,7 @@ ion-content.e-background {
 }
 
 div.e-list-user{
-  margin-top: 40px;
+  position: relative;
 }
 /*label.e-select-user{*/
   /*margin-top: 40px;*/
