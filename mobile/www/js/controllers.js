@@ -20,7 +20,7 @@ angular.module('app.controllers', [])
         }
       })
 
-      if(!$scope.currentUser){
+      if (!$scope.currentUser) {
         $scope.currentUser = $scope.users[0];
       }
 
@@ -29,7 +29,7 @@ angular.module('app.controllers', [])
         url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=' + $scope.currentUser.value + '&user_login_id=' + $scope.currentUser.value
       }).success(function (response, header, config, status) {
 
-        response.data.forEach(function(item){
+        response.data.forEach(function (item) {
           item.photo = $scope.photo;
         });
 
@@ -56,7 +56,7 @@ angular.module('app.controllers', [])
         method: 'GET',
         url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=' + currentUser.value + '&user_login_id=' + currentUser.value
       }).success(function (response, header, config, status) {
-        response.data.forEach(function(item){
+        response.data.forEach(function (item) {
           item.photo = $scope.photo;
         });
         $scope.plantList = response.data;
@@ -66,7 +66,7 @@ angular.module('app.controllers', [])
     }
   })
 
-  .controller('plantListCtrl', function ($scope, $http, $ionicLoading,$state) {
+  .controller('plantListCtrl', function ($scope, $http, $ionicLoading, $state, $ionicPopup) {
 
     $scope.bind = {
       "boxid": "",
@@ -87,18 +87,50 @@ angular.module('app.controllers', [])
       //http://127.0.0.1:8080/RockPlant/app/appController.do?operation=follow&user_login_id=11&plant_id=10
     }
 
+    $scope.showAlert = function (title, template, button, buttonType, callback) {
+      return alertPopup = $ionicPopup.alert({
+        title: title,
+        template: template,
+        buttons: [
+          {
+            text: button,
+            type: buttonType,
+            onTap: callback
+          }
+        ]
+      });
+    };
+
     $scope.bindPlant = function () {
       $ionicLoading.show();
       $scope.user_login_id = localStorage.getItem('currentUser');
       $http({
         method: 'GET',
-        url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=bind&user_login_id=' + $scope.user_login_id  + '&plant_id=' + $scope.bind.boxid + '&circusID=' + $scope.bind.circleid
+        url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=bind&user_login_id=' + $scope.user_login_id + '&plant_id=' + $scope.bind.boxid + '&circusID=' + $scope.bind.circleid
       }).success(function (response, header, config, status) {
+        var title = 'Bind Success!',
+          template = 'Enjoy the time with your plant :)',
+          button = '<b>Continue</b>',
+          buttonType = 'button-balanced';
+
         $ionicLoading.hide();
-        $state.go('eCOnnY');
+
+        $scope.showAlert(title, template, button, buttonType, function () {
+          $state.go('eCOnnY');
+        })
+
       }).error(function (response, status) {
+        var title = 'Bind Failed!',
+          template = 'Oops! Bind failed, please try again later :(',
+          button = '<b>Try Later</b>',
+          buttonType = 'button-balanced';
+
         $ionicLoading.hide();
-        console.log(response, status);
+
+        $scope.showAlert(title, template, button, buttonType, function () {
+            $state.go('eCOnnY');
+          }
+        )
       });
     }
   })
