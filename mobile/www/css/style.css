@@ -142,6 +142,10 @@ ion-content.e-background {
   font-size: 10px;
 }
 
+.platform-ios.platform-cordova div.e-list-user{
+  margin-top: 40px;
+}
+
 div.e-list-user{
   margin-top: 40px;
 }
