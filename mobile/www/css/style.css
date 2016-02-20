@@ -142,15 +142,15 @@ ion-content.e-background {
   font-size: 10px;
 }
 
-.platform-ios.platform-cordova div.e-list-user{
-  position: relative;
-  top: 40px;
-}
+/*.platform-ios.platform-cordova div.e-list-user{*/
+  /*position: relative;*/
+  /*top: 40px;*/
+/*}*/
 
-div.e-list-user{
-  position: relative;
-  top: 40px;
-}
+/*div.e-list-user{*/
+  /*position: relative;*/
+  /*top: 40px;*/
+/*}*/
 /*label.e-select-user{*/
   /*margin-top: 40px;*/
 /*}*/
@@ -188,7 +188,7 @@ ion-content.e-content {
 }
 
 ion-content.e-has-selector{
-  margin-top: 46px;
+  margin-top: 0px;
 }
 
 .bar-frosted.e-footbar {
@@ -338,7 +338,7 @@ ion-content.e-bind-background {
 }
 
 ion-content.e-search-background {
-  top:77px;
+  top:59px;
   background-color: #fafcfa;
 }
 
@@ -462,8 +462,8 @@ div.e-slide-button h5 {
   margin: 0 0 0 34px;
 }
 
-div.e-plant-search{
-  margin-top: 54px;
-}
+/*div.e-plant-search{*/
+  /*margin-top: 54px;*/
+/*}*/
 
 

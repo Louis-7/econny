@@ -1,14 +1,15 @@
 <ion-view title="Surprise Life" ng-init="onInitialize()">
-  <div class="list e-list-user">
-    <label class="item item-input item-select">
-      <div class="input-label">
-        Location
-      </div>
-      <select ng-model="currentUser" ng-options="user.key for user in users" ng-change="setCurrentUser(currentUser)">
-      </select>
-    </label>
-  </div>
+
   <ion-content padding="true" class="has-header e-background e-has-selector">
+    <div class="list e-list-user">
+      <label class="item item-input item-select">
+        <div class="input-label">
+          Location
+        </div>
+        <select ng-model="currentUser" ng-options="user.key for user in users" ng-change="setCurrentUser(currentUser)">
+        </select>
+      </label>
+    </div>
     <div class="e-frame" ng-repeat="plant in plantList" ng-click="gotoLivingroom(plant.plant_id)">
       <img src="data:image/jpg;base64,{{plant.photo}}" />
       <div class="e-info e-plantname">
