@@ -235,6 +235,6 @@ angular.module('app.controllers', [])
 
     //set default user
     if (localStorage.getItem('currentUser') == null) {
-      localStorage.setItem('currentUser', 'shanghai');
+      localStorage.setItem('currentUser', 1);
     }
   })
