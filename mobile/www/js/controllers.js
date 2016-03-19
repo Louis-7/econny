@@ -47,11 +47,12 @@ angular.module('app.controllers', [])
     $scope.setCurrentUser = function (currentUser) {
       localStorage.setItem('currentUser', currentUser.value);
 
-      econnyService.getPlantList($scope.currentUser.value, $scope.currentUser.value).then(
+      econnyService.getPlantList(currentUser.value, currentUser.value).then(
         function (response, header, config, status) {
           response.data.forEach(function (item) {
             item.photo = $scope.photo;
-          })
+          });
+          $scope.plantList = response.data;
         }, function (response, status) {
           console.log(response, status);
         });
@@ -141,7 +142,6 @@ angular.module('app.controllers', [])
         livingRoomService.sendMessage($scope.input.userinput).then(
           function (response, header, config, status) {
             if (response.content) {
-              //response.content = response.content.substring(1,response.content.length - 2);
               $scope.messages.push(angular.extend({}, {
                 content: '<div class="e-plant-img"></div><p>' + JSON.parse(response.content) + '</p>',
                 source: 'e'
