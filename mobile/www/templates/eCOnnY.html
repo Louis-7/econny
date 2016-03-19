@@ -11,7 +11,7 @@
       </label>
     </div>
     <div class="e-frame" ng-repeat="plant in plantList" ng-click="gotoLivingroom(plant.plant_id)">
-      <img src="data:image/jpg;base64,{{plant.photo}}" />
+      <img ng-src="data:image/jpg;base64,{{plant.photo}}"/>
       <div class="e-info e-plantname">
         {{plant.plant_name}}
       </div>

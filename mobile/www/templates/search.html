@@ -2,16 +2,16 @@
   <ion-content padding="true" class="has-header e-search-background">
     <div class="item item-input-inset e-plant-search">
       <label class="item-input-wrapper">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Click Search Button" ng-model="search.content">
       </label>
-      <button class="button button-small">
+      <button class="button button-small" ng-click="startSearch(search.content)">
         SEARCH
       </button>
     </div>
     <div class="e-plant-list">
       <div class="e-plant-item" ng-repeat="plant in plantList">
         <div class="e-frame-pl">
-          <img src="data:image/jpg;base64,{{plant.photo}}">
+          <img ng-src="data:image/jpg;base64,{{plant.photo}}">
         </div>
         <div class="e-info-pl">
           <h5 class="e-plantname-pl">
