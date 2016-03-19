@@ -1,6 +1,6 @@
 angular.module('app.controllers', [])
 
-  .controller('eCOnnYCtrl', function ($scope, $http, $state) {
+  .controller('eCOnnYCtrl', function ($scope, $http, $state, econnyService) {
     $scope.plantList = [];
     $scope.users = [
       {
@@ -24,66 +24,57 @@ angular.module('app.controllers', [])
         $scope.currentUser = $scope.users[0];
       }
 
-      $http({
-        method: 'GET',
-        url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=' + $scope.currentUser.value + '&user_login_id=' + $scope.currentUser.value
-      }).success(function (response, header, config, status) {
-
-        response.data.forEach(function (item) {
-          item.photo = $scope.photo;
-        });
-
-        $scope.plantList = response.data;
-
-      }).error(function (response, status) {
-        console.log(response, status);
-      });
-
-    }
+      econnyService.getPlantList($scope.currentUser.value, $scope.currentUser.value).then(
+        function (response, header, config, status) {
+          response.data.forEach(function (item) {
+            item.photo = $scope.photo;
+          });
+          $scope.plantList = response.data;
+        }, function (response, status) {
+          console.log(response, status);
+        }
+      );
+    };
 
     $scope.gotoLivingroom = function (plant_id) {
       $state.go('livingRoom', {id: plant_id})
-    }
+    };
 
     $scope.gotoPlantList = function () {
       $state.go('plantList.new')
-    }
+    };
 
     $scope.setCurrentUser = function (currentUser) {
       localStorage.setItem('currentUser', currentUser.value);
 
-      $http({
-        method: 'GET',
-        url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=' + currentUser.value + '&user_login_id=' + currentUser.value
-      }).success(function (response, header, config, status) {
-        response.data.forEach(function (item) {
-          item.photo = $scope.photo;
+      econnyService.getPlantList($scope.currentUser.value, $scope.currentUser.value).then(
+        function (response, header, config, status) {
+          response.data.forEach(function (item) {
+            item.photo = $scope.photo;
+          })
+        }, function (response, status) {
+          console.log(response, status);
         });
-        $scope.plantList = response.data;
-      }).error(function (response, status) {
-        console.log(response, status);
-      });
     }
   })
 
-  .controller('plantListCtrl', function ($scope, $http, $ionicLoading, $state, $ionicPopup) {
+  .controller('plantListCtrl', function ($scope, $http, $ionicLoading, $state, $ionicPopup, plantListService) {
 
     $scope.bind = {
       "boxid": "",
       "circleid": ""
     }
 
-    $http({
-      method: 'GET',
-      url: 'mock/plantlist.json' //http://120.25.102.53/RockPlant/app/appController.do?operation=searchownee&user_search_id=1
-    }).success(function (response, header, config, status) {
-      $scope.plantList = response;
-    }).error(function (response, status) {
-      console.log(response, status);
-    });
-
-    $scope.toggleLike = function (plant_id) {
-      $scope.plant.like = !$scope.plant.like;
+    plantListService.getPlantList().then(
+      function (response, header, config, status) {
+        $scope.plantList = response;
+      },
+      function (response, status) {
+        console.log(response, status);
+      }
+    );
+    $scope.toggleLike = function (plant) {
+      plant.like = !plant.like;
       //http://127.0.0.1:8080/RockPlant/app/appController.do?operation=follow&user_login_id=11&plant_id=10
     }
 
@@ -104,38 +95,37 @@ angular.module('app.controllers', [])
     $scope.bindPlant = function () {
       $ionicLoading.show();
       $scope.user_login_id = localStorage.getItem('currentUser');
-      $http({
-        method: 'GET',
-        url: 'http://120.25.102.53/RockPlant/app/appController.do?operation=bind&user_login_id=' + $scope.user_login_id + '&plant_id=' + $scope.bind.boxid + '&circusID=' + $scope.bind.circleid
-      }).success(function (response, header, config, status) {
-        var title = 'Bind Success!',
-          template = 'Enjoy the time with your plant :)',
-          button = '<b>Continue</b>',
-          buttonType = 'button-balanced';
+      plantListService.bindPlant($scope.user_login_id, $scope.bind.boxid, $scope.bind.circleid).then(
+        function (response, header, config, status) {
+          var title = 'Bind Success!',
+            template = 'Enjoy the time with your plant :)',
+            button = '<b>Continue</b>',
+            buttonType = 'button-balanced';
 
-        $ionicLoading.hide();
+          $ionicLoading.hide();
 
-        $scope.showAlert(title, template, button, buttonType, function () {
-          $state.go('eCOnnY');
-        })
-
-      }).error(function (response, status) {
-        var title = 'Bind Failed!',
-          template = 'Oops! Bind failed, please try again later :(',
-          button = '<b>Try Later</b>',
-          buttonType = 'button-balanced';
-
-        $ionicLoading.hide();
-
-        $scope.showAlert(title, template, button, buttonType, function () {
+          $scope.showAlert(title, template, button, buttonType, function () {
             $state.go('eCOnnY');
-          }
-        )
-      });
+          })
+        },
+        function (response, status) {
+          var title = 'Bind Failed!',
+            template = 'Oops! Bind failed, please try again later :(',
+            button = '<b>Try Later</b>',
+            buttonType = 'button-balanced';
+
+          $ionicLoading.hide();
+
+          $scope.showAlert(title, template, button, buttonType, function () {
+              $state.go('eCOnnY');
+            }
+          )
+        }
+      );
     }
   })
 
-  .controller('livingRoomCtrl', function ($scope, $http, $stateParams, $ionicScrollDelegate) {
+  .controller('livingRoomCtrl', function ($scope, $http, $stateParams, $ionicScrollDelegate, livingRoomService) {
     $scope.status = {};
     $scope.input = {userinput: null};
     $scope.messageOptions = [];
@@ -148,77 +138,77 @@ angular.module('app.controllers', [])
           source: 'u'
         }));
 
-        $http({
-          method: 'GET',
-          url: 'http://120.25.102.53/RockPlant/app/talk2plant.do?question=' + $scope.input.userinput
-          //data: {question: $scope.input.userinput}
-        }).success(function (response, header, config, status) {
-          console.log("======================================================== API =======================================================")
-          if (response.content) {
-            //response.content = response.content.substring(1,response.content.length - 2);
+        livingRoomService.sendMessage($scope.input.userinput).then(
+          function (response, header, config, status) {
+            if (response.content) {
+              //response.content = response.content.substring(1,response.content.length - 2);
+              $scope.messages.push(angular.extend({}, {
+                content: '<div class="e-plant-img"></div><p>' + JSON.parse(response.content) + '</p>',
+                source: 'e'
+              }));
+              $ionicScrollDelegate.scrollBottom(true);
+            }
+          },
+          function (response, status) {
             $scope.messages.push(angular.extend({}, {
-              content: '<div class="e-plant-img"></div><p>' + JSON.parse(response.content) + '</p>',
+              content: '<div class="e-plant-img"></div><p>' + JSON.parse('Network Error.') + '</p>',
               source: 'e'
             }));
             $ionicScrollDelegate.scrollBottom(true);
           }
-        }).error(function (response, status) {
-          console.log("======================================================== ERROR =====================================================")
-        })
-
+        );
         $scope.input.userinput = null;
-        $ionicScrollDelegate.scrollBottom(true);
+        setTimeout(function(){
+          $ionicScrollDelegate.scrollBottom(true);
+        },500);
       }
     }
 
     $scope.requestData = function () {
+      livingRoomService.queryStatus().then(
+        function (response, header, config, status) {
+          $scope.status = {
+            "air_hum_status": response[response.length - 1].air_hum_status,
+            "light_status": response[response.length - 1].light_status,
+            "soil_hum_status": response[response.length - 1].soil_hum_status,
+            "temp_status": response[response.length - 1].temp_status
+          };
 
-      console.log($stateParams.id);
-      $http({
-        method: 'GET',
-        url: 'http://120.25.102.53/RockPlant/app/queryStatus.do'
-        //http://120.25.102.53/RockPlant/app/queryStatus.do?plant_id=1
-        //url: '../mock/data.json'
-      }).success(function (response, header, config, status) {
-        $scope.status = {
-          "air_hum_status": response[response.length - 1].air_hum_status,
-          "light_status": response[response.length - 1].light_status,
-          "soil_hum_status": response[response.length - 1].soil_hum_status,
-          "temp_status": response[response.length - 1].temp_status
-        };
+          if (!$scope.messages) {
+            angular.forEach(response, function (res) {
+              if (res.content.indexOf('OK!') === -1) {
+                $scope.messageOptions.push(angular.extend({}, {
+                  content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
+                  source: 'e'
+                }))
+              }
 
-        if (!$scope.messages) {
-          angular.forEach(response, function (res) {
-            if (res.content.indexOf('OK!') === -1) {
-              $scope.messageOptions.push(angular.extend({}, {
-                content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
-                source: 'e'
-              }))
-            }
-
-          })
-          $scope.messages = $scope.messageOptions.slice(0, $scope.messageOptions.length);
-          setTimeout(function () {
+            });
+            $scope.messages = $scope.messageOptions.slice(0, $scope.messageOptions.length);
+            setTimeout(function () {
+              $ionicScrollDelegate.scrollBottom(true);
+            }, 500);
+          }
+          else {
+            angular.forEach(response, function (res) {
+              if (res.content.indexOf('OK!') === -1) {
+                $scope.messages.push(angular.extend({}, {
+                  content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
+                  source: 'e'
+                }));
+              }
+            });
             $ionicScrollDelegate.scrollBottom(true);
-          }, 500);
-        }
-        else {
-          angular.forEach(response, function (res) {
-            if (res.content.indexOf('OK!') === -1) {
-              $scope.messages.push(angular.extend({}, {
-                content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
-                source: 'e'
-              }));
-            }
-          })
-
+          }
+        },
+        function(response, status){
+          $scope.messages.push(angular.extend({}, {
+            content: '<div class="e-plant-img"></div><p>' + JSON.parse('Network Error.') + '</p>',
+            source: 'e'
+          }));
           $ionicScrollDelegate.scrollBottom(true);
         }
-        console.log("======================================================== API =======================================================")
-      }).error(function (response, status) {
-        //console.log(response,status);
-        console.log("======================================================== ERROR =====================================================")
-      });
+      );
     }
   })
 
