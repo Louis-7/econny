@@ -13,7 +13,7 @@ angular.module('app.routes', [])
     .state('eCOnnY', {
       url: '/econny',
       cache:false,
-      templateUrl: 'templates/eCOnnY.html',
+      templateUrl: 'eCOnnY.html',
       controller: 'eCOnnYCtrl'
     })
 
@@ -24,7 +24,7 @@ angular.module('app.routes', [])
     .state('plantList', {
       url: '/list',
       abstract:true,
-      templateUrl: 'templates/plantList.html',
+      templateUrl: 'plantList.html',
       controller: 'plantListCtrl'
     })
 
@@ -35,7 +35,7 @@ angular.module('app.routes', [])
       url: '/new',
       views: {
         'listView': {
-          templateUrl: 'templates/bind.html',
+          templateUrl: 'bind.html',
           controller: 'plantListCtrl'
         }
       }
@@ -48,7 +48,7 @@ angular.module('app.routes', [])
       url: '/search',
       views: {
         'listView': {
-          templateUrl: 'templates/search.html',
+          templateUrl: 'search.html',
           controller: 'plantListCtrl'
         }
       }
@@ -59,7 +59,7 @@ angular.module('app.routes', [])
 
     .state('livingRoom', {
       url: '/living/:id',
-      templateUrl: 'templates/livingRoom.html',
+      templateUrl: 'livingRoom.html',
       controller: 'livingRoomCtrl'
     })
 
@@ -69,7 +69,7 @@ angular.module('app.routes', [])
 
     .state('guidePage', {
       url: '/guide',
-      templateUrl: 'templates/guidePage.html',
+      templateUrl: 'guidePage.html',
       controller: 'guidePageCtrl'
     })
 
