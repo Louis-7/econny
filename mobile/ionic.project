@@ -5,6 +5,7 @@
     "sass",
     "templatecache",
     "ng_annotate",
+     "useref",
     "watch"
   ],
   "watchPatterns": [

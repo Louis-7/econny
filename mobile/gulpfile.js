@@ -8,14 +8,16 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var templateCache = require('gulp-angular-templatecache');
 var ngAnnotate = require('gulp-ng-annotate');
+var useref = require('gulp-useref');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
   templatecache: ['./www/templates/**/*.html'],
-  ng_annotate: ['./www/js/*.js']
+  ng_annotate: ['./www/js/*.js'],
+  useref: ['./www/*.html']
 };
 
-gulp.task('default', ['sass','templatecache','ng_annotate']);
+gulp.task('default', ['sass','templatecache','ng_annotate','useref']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -44,10 +46,21 @@ gulp.task('ng_annotate', function (done) {
     .on('end', done);
 });
 
+gulp.task('useref', function (done) {
+  var assets = useref.assets();
+  gulp.src('./www/*.html')
+    .pipe(assets)
+    .pipe(assets.restore())
+    .pipe(useref())
+    .pipe(gulp.dest('./www/dist'))
+    .on('end', done);
+});
+
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.templatecache, ['templatecache']);
   gulp.watch(paths.ng_annotate, ['ng_annotate']);
+  gulp.watch(paths.useref, ['useref']);
 });
 
 gulp.task('install', ['git-check'], function() {
