@@ -45,7 +45,7 @@ function param(param) {
     i;
   for (i in param) {
     if (param.hasOwnProperty(i)) {
-      if (str[0] != undefined) {
+      if (str[0] !== undefined) {
         str += "&";
       }
       str += encodeURIComponent(i);

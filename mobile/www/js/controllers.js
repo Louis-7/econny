@@ -222,7 +222,7 @@ angular.module('app.controllers', [])
 
   .controller('indexCtrl', function ($scope) {
     $scope.firstTime = false;
-    if (localStorage.getItem('firstTime') == null) {
+    if (localStorage.getItem('firstTime') === null || localStorage.getItem('firstTime') === undefined) {
       localStorage.setItem('firstTime', false);
       $scope.firstTime = true;
     }
@@ -232,7 +232,7 @@ angular.module('app.controllers', [])
     };
 
     //set default user
-    if (localStorage.getItem('currentUser') == null) {
+    if (localStorage.getItem('currentUser') === null || localStorage.getItem('currentUser') === undefined) {
       localStorage.setItem('currentUser', 1);
     }
   });
