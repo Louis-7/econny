@@ -35,10 +35,10 @@ angular.module('app', ['ionic', 'app.provider', 'app.controllers', 'app.routes',
         return data;
       }
       return param(data);
-    }
+    };
 
     $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-  })
+  });
 
 function param(param) {
   var str = "",
@@ -54,4 +54,4 @@ function param(param) {
     }
   }
   return str;
-};
+}

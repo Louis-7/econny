@@ -56,7 +56,7 @@ angular.module('app.provider', [])
         bindPlant: webBaseurl[envIndex] + '/app/appController.do?operation=bind&user_login_id={0}&plant_id={1}&circusID={2}',
         sendMessage: webBaseurl[envIndex] + '/app/talk2plant.do?question={0}',
         queryStatus: webBaseurl[envIndex] + '/app/queryStatus.do'
-      }
+      };
     };
 
     this.$get = function () {

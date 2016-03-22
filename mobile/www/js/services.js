@@ -130,7 +130,7 @@ angular.module('app.services', [])
         defer.reject(response, status);
       });
       return defer.promise;
-    }
+    };
 
     return econny;
   }])

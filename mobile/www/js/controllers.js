@@ -20,7 +20,7 @@ angular.module('app.controllers', [])
         if (user.value === parseInt(localStorage.getItem('currentUser'))) {
           $scope.currentUser = user;
         }
-      })
+      });
 
       if (!$scope.currentUser) {
         $scope.currentUser = $scope.users[0];
@@ -29,7 +29,7 @@ angular.module('app.controllers', [])
       econnyService.getPlantList($scope.currentUser.value, $scope.currentUser.value).then(
         function (response, header, config, status) {
           response.data.forEach(function (item, index) {
-            item.photo = $scope['photo' + index]?$scope['photo' + index]:$scope['photo1'];
+            item.photo = $scope['photo' + index]?$scope['photo' + index]:$scope.photo1;
           });
           $scope.plantList = response.data;
         }, function (response, status) {
@@ -39,11 +39,11 @@ angular.module('app.controllers', [])
     };
 
     $scope.gotoLivingroom = function (plant_id) {
-      $state.go('livingRoom', {id: plant_id})
+      $state.go('livingRoom', {id: plant_id});
     };
 
     $scope.gotoPlantList = function () {
-      $state.go('plantList.search')
+      $state.go('plantList.search');
     };
 
     $scope.setCurrentUser = function (currentUser) {
@@ -52,13 +52,13 @@ angular.module('app.controllers', [])
       econnyService.getPlantList(currentUser.value, currentUser.value).then(
         function (response, header, config, status) {
           response.data.forEach(function (item, index) {
-            item.photo = $scope['photo' + index]?$scope['photo' + index]:$scope['photo1'];
+            item.photo = $scope['photo' + index]?$scope['photo' + index]:$scope.photo1;
           });
           $scope.plantList = response.data;
         }, function (response, status) {
           console.log(response, status);
         });
-    }
+    };
   })
 
   .controller('plantListCtrl', function ($scope, $http, $ionicLoading, $state, $ionicPopup, plantListService) {
@@ -69,7 +69,7 @@ angular.module('app.controllers', [])
     };
     $scope.search = {
       'content': ""
-    }
+    };
     $scope.startSearch = function (content) {
       plantListService.getPlantList().then(
         function (response, header, config, status) {
@@ -80,15 +80,15 @@ angular.module('app.controllers', [])
         }
       );
       // $scope.search.content = "";
-    }
+    };
 
     $scope.toggleLike = function (plant) {
       plant.like = !plant.like;
       //http://127.0.0.1:8080/RockPlant/app/appController.do?operation=follow&user_login_id=11&plant_id=10
-    }
+    };
 
     $scope.showAlert = function (title, template, button, buttonType, callback) {
-      return alertPopup = $ionicPopup.alert({
+      return $ionicPopup.alert({
         title: title,
         template: template,
         buttons: [
@@ -115,7 +115,7 @@ angular.module('app.controllers', [])
 
           $scope.showAlert(title, template, button, buttonType, function () {
             $state.go('eCOnnY');
-          })
+          });
         },
         function (response, status) {
           var title = 'Bind Failed!',
@@ -128,10 +128,10 @@ angular.module('app.controllers', [])
           $scope.showAlert(title, template, button, buttonType, function () {
               $state.go('eCOnnY');
             }
-          )
+          );
         }
       );
-    }
+    };
   })
 
   .controller('livingRoomCtrl', function ($scope, $http, $stateParams, $ionicScrollDelegate, livingRoomService) {
@@ -170,7 +170,7 @@ angular.module('app.controllers', [])
           $ionicScrollDelegate.scrollBottom(true);
         }, 500);
       }
-    }
+    };
 
     $scope.requestData = function () {
       livingRoomService.queryStatus().then(
@@ -188,7 +188,7 @@ angular.module('app.controllers', [])
                 $scope.messageOptions.push(angular.extend({}, {
                   content: '<div class="e-plant-img"></div><p>' + res.content + '</p>',
                   source: 'e'
-                }))
+                }));
               }
 
             });
@@ -217,7 +217,7 @@ angular.module('app.controllers', [])
           $ionicScrollDelegate.scrollBottom(true);
         }
       );
-    }
+    };
   })
 
   .controller('indexCtrl', function ($scope) {
@@ -229,10 +229,10 @@ angular.module('app.controllers', [])
 
     $scope.closeGuide = function () {
       $scope.firstTime = false;
-    }
+    };
 
     //set default user
     if (localStorage.getItem('currentUser') == null) {
       localStorage.setItem('currentUser', 1);
     }
-  })
+  });
